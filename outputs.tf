@@ -5,7 +5,7 @@ output "id" {
 
 output "name" {
   description = "The Object Storage instance name"
-  value       = local.name
+  value       = "${var.name_prefix}-${local.name}"
   depends_on  = [data.ibm_resource_instance.cm]
 }
 

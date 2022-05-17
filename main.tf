@@ -1,4 +1,10 @@
 
+provider ibm {
+  ibmcloud_api_key      = var.ibmcloud_api_key
+  region                = var.region
+  ibmcloud_timeout      = 60
+}
+
 locals {
   prefix_name   = var.name_prefix != "" ? var.name_prefix : var.resource_group_name
   name   = lower(replace(var.name != "" ? var.name : "${local.prefix_name}-${var.label}", "_", "-"))
@@ -36,7 +42,7 @@ data ibm_resource_group resource_group {
 resource ibm_resource_instance cm {
   count = var.provision ? 1 : 0
 
-  name              = local.name
+  name              = "${var.name_prefix}-${local.name}"
   location          = var.region
   resource_group_id = data.ibm_resource_group.resource_group.id
   plan              = "free"
@@ -47,7 +53,7 @@ resource ibm_resource_instance cm {
 data ibm_resource_instance cm {
   depends_on        = [ibm_resource_instance.cm]
 
-  name              = local.name
+  name              = "${var.name_prefix}-${local.name}"
   resource_group_id = data.ibm_resource_group.resource_group.id
   location          = var.region
   service           = local.service

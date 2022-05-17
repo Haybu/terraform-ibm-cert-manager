@@ -1,2 +1,9 @@
 .idea/
 *.iml
+terraform.tfvars
+.terraform.*
+.terraform/
+.DS_Store
+terraform.*.*
+terraform.tfstate
+terraform.tfvars

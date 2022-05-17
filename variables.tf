@@ -1,3 +1,9 @@
+variable ibmcloud_api_key {
+  description = "The IBM Cloud platform API key needed to deploy IAM enabled resources"
+  type        = string
+  sensitive   = true
+}
+
 variable "resource_group_name" {
   type        = string
   description = "The name of the IBM Cloud resource group where the Certificate Manager instance will be/has been provisioned."
@@ -5,6 +11,7 @@ variable "resource_group_name" {
 
 variable "region" {
   description = "The region where the Certificate Manager will be/has been provisioned."
+  default = "us-south"
   type        = string
 }
 
@@ -65,7 +72,7 @@ variable "name" {
 variable "label" {
   description = "Label used to build the Certificate Manager name if not provided."
   type        = string
-  default     = "cm"
+  default     = "cm_mvp"
 }
 
 variable "private_endpoint" {
